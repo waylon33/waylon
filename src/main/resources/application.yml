@@ -1,10 +1,9 @@
-http:
-    port: 8080
-
 server:
     ssl:
       key-store: classpath:keystore.p12
-      key-store-password: waylon911
+      key-store-password: 123456
       keyStoreType: PKCS12
       keyAlias: tomcat
-    port: 18770
+    port: 18777
+http:
+    port: 8080

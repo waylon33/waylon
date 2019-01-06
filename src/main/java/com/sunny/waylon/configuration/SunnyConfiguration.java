@@ -20,15 +20,16 @@ public class SunnyConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SunnyConfiguration.class);
 
-//    @Value("${server.port}")
-//    private Integer httpsPort;
-//
-//    @Value("${http.port}")
-//    private Integer httpPort;
-//    @Bean
-//    public void startConfiguration(){
-//        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~ start configuration ~~~~~~~~~~~~~~~~~~~~");
-//    }
+    @Value("${server.port}")
+    private Integer httpsPort;
+
+    @Value("${http.port}")
+    private Integer httpPort;
+
+    @Bean
+    public void startConfiguration(){
+        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~ start configuration ~~~~~~~~~~~~~~~~~~~~");
+    }
 
     @Bean
     public RestTemplate restTemplate(){
@@ -58,16 +59,16 @@ public class SunnyConfiguration {
     private Connector httpConnector(){
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
-        connector.setPort(8080);
+        connector.setPort(httpPort);
         connector.setSecure(false);
-        connector.setRedirectPort(18770);
+        connector.setRedirectPort(httpsPort);
         return connector;
     }
 
     @PostConstruct
     public void init(){
         LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~ configuration start ~~~~~~~~~~~~~~~~~~~~");
-//        LOGGER.info("httpsPort: " + httpsPort + "/n" + "httpPort: " + httpPort);
+        LOGGER.info("httpsPort: " + httpsPort + "\n" + "httpPort: " + httpPort);
         LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~ configuration end ~~~~~~~~~~~~~~~~~~~~");
     }
 }
